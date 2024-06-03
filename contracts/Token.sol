@@ -104,4 +104,9 @@ contract NFTMintDN404 is DN404, ERC20Permit, Ownable {
         allowlistPrice = allowlistPrice_;
     }
 
+    // initialize toggle live functionality
+    function toggleLive() public onlyOwner {
+        live = !live;
+    }
+
 }
