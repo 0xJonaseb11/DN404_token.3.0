@@ -106,7 +106,11 @@ contract NFTMintDN404 is DN404, ERC20Permit, Ownable {
 
     // initialize toggle liveness functionality
     function toggleLive() public onlyOwner {
-        live = !live;
+        if (live) {
+            live = false;
+        } else {
+            live = true;
+        }
     }
 
     // initialize withdraw functionality
@@ -121,7 +125,13 @@ contract NFTMintDN404 is DN404, ERC20Permit, Ownable {
     function symbol() public view returns(string memory) {
         return _symbol;
     }
-
     
+    // initialize tokenURI functionality - token metadata
+    function tokenURI(uint256 tokenId) public view override returns(string memory result) {
+        if (bytes(_baseURI).length != 0) {
+            result = string(abi.encodePacked(_baseURI, LibString.toString(tokenId)));
+        }
+
+    }
 
 }
